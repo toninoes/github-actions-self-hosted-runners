@@ -8,6 +8,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - name: Entrar directorio terraform
+      run: cd terraform
+      
     - name: Verify Terraform version
       run: terraform --version
 
