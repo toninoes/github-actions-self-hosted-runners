@@ -19,7 +19,7 @@ jobs:
 
     - name: Install some utilities
       id: utilities
-      run: apt-get install pwgen putty-tools -y
+      run: sudo apt-get update && apt-get install pwgen putty-tools -y
 
     - name: Verify Terraform version
       id: version
