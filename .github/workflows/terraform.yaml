@@ -17,10 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Install some utilities
-      id: utilities
-      run: sudo yum update && sudo yum install pwgen putty-tools -y
-
     - name: Verify Terraform version
       id: version
       run: terraform --version
