@@ -18,6 +18,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: arn:aws:iam::329066851743:role/TestRunners
+        role-duration-seconds: 1200
         aws-region: eu-west-1
 
     - name: Install Terraform
