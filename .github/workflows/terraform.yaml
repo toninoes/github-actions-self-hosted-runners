@@ -13,7 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: hashicorp/setup-terraform@v1
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -26,13 +25,9 @@ jobs:
       id: version
       run: terraform --version
       
-#    - name: Install Terraform
-#      id: utilities
-#      run: sudo yum install -y jq yum-utils && sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo && sudo yum -y install terraform
-
-    - name: Install utilities
-      id: util
-      run: sudo yum install -y jq
+    - name: Install Terraform
+      id: utilities
+      run: sudo yum install -y jq yum-utils && sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo && sudo yum -y install terraform
       
     - name: Assume Role
       id: assume_role
