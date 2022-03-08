@@ -63,7 +63,7 @@ jobs:
       
     - name: Terraform Apply
       id: apply
-      if: github.ref == 'refs/heads/main-mi-prueba-github-actions' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/main-con-runners-self-hosted-roles' && github.event_name == 'push'
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
       run: |
