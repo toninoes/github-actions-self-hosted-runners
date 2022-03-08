@@ -28,10 +28,6 @@ jobs:
     - name: Verify Terraform version
       id: version
       run: terraform --version
-      
-#    - name: Assume Role
-#      id: assume_role
-#      run: sh ./script.sh ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
 
     - name: Assume Role
 #      if: github.event_name == 'pull_request'
