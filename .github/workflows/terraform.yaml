@@ -14,8 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 0.12.25
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
