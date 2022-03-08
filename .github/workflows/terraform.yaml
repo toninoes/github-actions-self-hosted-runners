@@ -27,4 +27,4 @@ jobs:
 
     - name: Assume Role
       id: assume_role
-      run: ./script.sh
+      run: sh ./script.sh
