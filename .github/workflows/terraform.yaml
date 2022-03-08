@@ -43,7 +43,7 @@ jobs:
 
     - name: Print Current Role
       id: current_role
-      run: echo "Current Assume role is:" && aws sts get-caller-identity
+      run: echo "Current Assume role is:" && aws sts get-caller-identity >> /tmp/roles.txt
       
     - name: Verify Terraform version
       id: version
