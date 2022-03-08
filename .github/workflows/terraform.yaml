@@ -41,6 +41,13 @@ jobs:
       id: access_session_id_new_role
       run: export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
 
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-session-name: AWS_ROLE_TO_ASSUME_550341143323
+        role-duration-seconds: 1200
+        aws-region: eu-west-1
+        
     - name: Print Current Role
       id: current_role
       run: echo "Current Assume role is:" && aws sts get-caller-identity >> /tmp/roles.txt
