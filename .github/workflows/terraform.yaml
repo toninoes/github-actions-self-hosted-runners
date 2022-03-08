@@ -20,14 +20,14 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_329066851743 }}
         role-duration-seconds: 1200
         aws-region: eu-west-1
-
-    - name: Verify Terraform version
-      id: version
-      run: terraform --version
       
     - name: Install Terraform
       id: utilities
       run: sudo yum install -y jq yum-utils && sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo && sudo yum -y install terraform
+  
+    - name: Verify Terraform version
+      id: version
+      run: terraform --version
       
     - name: Assume Role
       id: assume_role
