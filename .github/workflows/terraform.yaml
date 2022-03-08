@@ -59,7 +59,7 @@ jobs:
         export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq -r .Credentials.AccessKeyId)
         export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq -r .Credentials.SecretAccessKey)
         export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
-        terraform plan -no-color
+        terraform plan
       
     - name: Terraform Apply
       id: apply
@@ -71,5 +71,5 @@ jobs:
         export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq -r .Credentials.AccessKeyId)
         export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq -r .Credentials.SecretAccessKey)
         export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
-        terraform apply -auto-approve -input=false
+        terraform apply -auto-approve
 
