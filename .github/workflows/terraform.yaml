@@ -27,7 +27,7 @@ jobs:
 
     - name: Install some utilities
       id: install_utilities
-      run: sudo yum update && sudo yum install jq -y
+      run: sudo yum install jq -y
       
     - name: Verify Terraform version
       id: version
