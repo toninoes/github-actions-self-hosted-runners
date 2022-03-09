@@ -34,8 +34,8 @@ jobs:
           sudo yum -y install terraform
         fi
 
-    - name: Install some utilities
-      id: install_utilities
+    - name: Install jq
+      id: install_jq
       run: |
         if [ ! `which jq` ]; then
           sudo yum install jq -y
