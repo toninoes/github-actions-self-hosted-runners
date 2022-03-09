@@ -4,10 +4,8 @@ defaults:
     working-directory: "terraform"
 
 on:
-  pull_request:
-  push:
-    branches-ignore:
-      - dev
+  - pull_request
+  - push
 
 jobs:
   terraform:
@@ -32,8 +30,8 @@ jobs:
           sudo yum -y install terraform
         fi
 
-    - name: Install some utilities
-      id: install_utilities
+    - name: Install jq
+      id: install_jq
       run: |
         if [ ! `which jq` ]; then
           sudo yum install jq -y
