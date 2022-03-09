@@ -39,7 +39,7 @@ jobs:
         
   terraform:
     runs-on: [self-hosted, Linux, X64]
-
+    needs: [install]
     steps:
     - uses: actions/checkout@v1
 
