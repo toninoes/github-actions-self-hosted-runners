@@ -39,7 +39,7 @@ jobs:
           sudo yum install jq -y
         fi 
         
-  terraform:
+  terraform_plan:
     runs-on: [self-hosted, Linux, X64]
     needs: [install]
     steps:
@@ -95,6 +95,20 @@ jobs:
         export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq -r .Credentials.SecretAccessKey)
         export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
         exit 1
+
+  terraform_apply:
+    runs-on: [self-hosted, Linux, X64]
+    needs: [terraform_plan]
+    environment: prod
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_329066851743 }}
+        role-duration-seconds: 1200
+        aws-region: eu-west-1
         
     - name: Terraform Apply
       id: apply
