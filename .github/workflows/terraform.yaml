@@ -75,7 +75,7 @@ jobs:
       id: plan
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}      
-      if: github.event_name == 'pull_request'
+      if: github.event_name == 'pull_request' || github.event_name == 'push'
       continue-on-error: true       
       run: |
         temp_role=$(aws sts assume-role --role-arn ${ROLE} --role-session-name AWS_ROLE_TO_ASSUME)
@@ -83,7 +83,19 @@ jobs:
         export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq -r .Credentials.SecretAccessKey)
         export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
         terraform plan
-      
+
+    - name: Terraform Plan Status
+      id: plan_status
+      env:
+        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}      
+      if: status.plan.outcome == 'failure'
+      run: |
+        temp_role=$(aws sts assume-role --role-arn ${ROLE} --role-session-name AWS_ROLE_TO_ASSUME)
+        export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq -r .Credentials.AccessKeyId)
+        export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq -r .Credentials.SecretAccessKey)
+        export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
+        exit 1
+        
     - name: Terraform Apply
       id: apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
