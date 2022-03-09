@@ -4,12 +4,8 @@ defaults:
     working-directory: "terraform"
 
 on:
-  pull_request:
-    branches-ignore:
-      - dev  
-  push:
-    branches-ignore:
-      - dev
+  - pull_request
+  - push
 
 jobs:
   terraform:
