@@ -23,12 +23,19 @@ jobs:
       
     - name: Install Terraform
       id: install_terraform
-      run: sudo yum install -y yum-utils && sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo && sudo yum -y install terraform
+      run: |
+        if [ ! `which terraform` ]; then
+          sudo yum install -y yum-utils
+          sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+          sudo yum -y install terraform
+        fi
 
     - name: Install some utilities
       id: install_utilities
-      run: sudo yum install jq -y
-      
+      run: |
+        if [ ! `which jq` ]; then
+          sudo yum install jq -y
+        fi      
     - name: Verify Terraform version
       id: version
       run: terraform --version
