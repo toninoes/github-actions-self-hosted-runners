@@ -64,7 +64,9 @@ jobs:
       id: init        
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
-      run: sh ./assume_role.sh $ROLE 'terraform init'
+      run: |
+        sh ./assume_role.sh $ROLE
+        terraform init
 
     - name: Terraform Plan
       id: plan
