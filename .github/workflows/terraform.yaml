@@ -72,14 +72,14 @@ jobs:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}      
       if: github.event_name == 'pull_request' || github.event_name == 'push'
       continue-on-error: true       
-      run: sh ./assume_role.sh $ROLE 'terraform plan'
+      run: sh ./assume_role.sh $ROLE terraform plan
 
     - name: Terraform Plan Status
       id: plan_status
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}      
       if: steps.plan.outcome == 'failure'
-      run: sh ./assume_role.sh $ROLE 'exit 1'
+      run: sh ./assume_role.sh $ROLE exit 1
 
   terraform_apply:
     runs-on: [self-hosted, Linux, X64]
@@ -99,11 +99,11 @@ jobs:
       id: init        
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
-      run: sh ./assume_role.sh $ROLE 'terraform init'
+      run: sh ./assume_role.sh $ROLE terraform init
         
     - name: Terraform Apply
       id: apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
-      run: sh ./assume_role.sh $ROLE 'terraform apply -auto-approve'
+      run: sh ./assume_role.sh $ROLE terraform apply -auto-approve
