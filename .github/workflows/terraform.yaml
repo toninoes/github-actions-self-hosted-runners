@@ -67,6 +67,7 @@ jobs:
       run: |
         sh ./assume_role.sh $ROLE
         terraform init
+        
 
     - name: Terraform Plan
       id: plan
