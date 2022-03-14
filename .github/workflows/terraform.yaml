@@ -24,9 +24,6 @@ jobs:
         aws-region: eu-west-1
       
     - uses: actions/checkout@v3
-    - uses: docker/setup-buildx-action@v1
-      with:
-        install: true
         
     - uses: hashicorp/setup-terraform@v1.2.1
       with:
@@ -61,14 +58,6 @@ jobs:
 
     - name: Terraform Format
       run: terraform fmt -check -recursive
-
-    # Añade comentarios al PR cuando TFSEC falla
-    # https://github.com/marketplace/actions/run-tfsec-pr-commenter
-    - name: tfsec
-      uses: aquasecurity/tfsec-pr-commenter-action@v1.1.0
-      with:
-        tfsec_args: --soft-fail
-        github_token: ${{ github.token }}  
         
     - name: Terraform Init    
       env:
