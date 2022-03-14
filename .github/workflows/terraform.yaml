@@ -40,7 +40,7 @@ jobs:
           sudo yum install jq -y
         fi 
         
-  terraform_plan:
+  terraform_plan: # CI (Continous Integration)
     runs-on: [self-hosted, Linux, X64]
     needs: [install]
     steps:
@@ -77,7 +77,7 @@ jobs:
       if: steps.plan.outcome == 'failure'
       run: sh ./assume_role.sh $ROLE exit 1
 
-  terraform_apply:
+  terraform_apply: # CD (Continous Deployment)
     runs-on: [self-hosted, Linux, X64]
     needs: [terraform_plan]
     environment: prod
