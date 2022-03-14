@@ -58,6 +58,14 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check -recursive
 
+    # Añade comentarios al PR cuando TFSEC falla
+    # https://github.com/marketplace/actions/run-tfsec-pr-commenter
+    - name: tfsec
+      uses: aquasecurity/tfsec-pr-commenter-action@v1.1.0
+      with:
+        tfsec_args: --soft-fail
+        github_token: ${{ github.token }}  
+        
     - name: Terraform Init    
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
