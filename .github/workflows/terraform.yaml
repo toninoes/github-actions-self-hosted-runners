@@ -23,17 +23,17 @@ jobs:
         role-duration-seconds: 1200
         aws-region: eu-west-1
       
-    - name: Install Terraform
-      id: install_terraform
-      run: |
-        if [ ! `which terraform` ]; then
-          sudo yum install -y yum-utils
-          sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-          sudo yum -y install terraform
-        fi
+    - uses: actions/checkout@v3
+    - uses: hashicorp/setup-terraform@v1.2.1
+      with:
+        terraform_version: 1.1.7
+
+    - name: Setup NodeJs
+      uses: actions/setup-node@v2
+      with:
+        node-version: '12'
 
     - name: Install jq
-      id: install_jq
       run: |
         if [ ! `which jq` ]; then
           sudo yum install jq -y
@@ -53,21 +53,17 @@ jobs:
         aws-region: eu-west-1
           
     - name: Verify Terraform version
-      id: version
       run: terraform --version
 
     - name: Terraform Format
-      id: fmt
       run: terraform fmt -check -recursive
 
-    - name: Terraform Init
-      id: init        
+    - name: Terraform Init    
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
       run: sh ./assume_role.sh $ROLE terraform init
 
     - name: Terraform Plan
-      id: plan
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}      
       if: github.event_name == 'pull_request' || github.event_name == 'push'
@@ -75,7 +71,6 @@ jobs:
       run: sh ./assume_role.sh $ROLE terraform plan
 
     - name: Terraform Plan Status
-      id: plan_status
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}      
       if: steps.plan.outcome == 'failure'
@@ -95,14 +90,12 @@ jobs:
         role-duration-seconds: 1200
         aws-region: eu-west-1
 
-    - name: Terraform Init
-      id: init        
+    - name: Terraform Init     
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
       run: sh ./assume_role.sh $ROLE terraform init
         
     - name: Terraform Apply
-      id: apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       env:
         ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
