@@ -24,3 +24,67 @@ su -c "/actions-runner/config.sh --unattended --url https://github.com/toninoes/
 /usr/bin/bash svc.sh install
 /usr/bin/bash svc.sh start
 ```
+
+## Crear y adjuntar Rol a la instancia del Runner
+Creamos el rol cuyo arn será arn:aws:iam::111111111111:role/TestRunners y contendrá la siguiente pólitica:
+
+```sh
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sts:AssumeRole",
+                "sts:TagSession"
+            ],
+            "Resource": [
+                "arn:aws:iam::111111111111:role/TestRunners",
+                "arn:aws:iam::222222222222:role/TestRunners",
+            ]
+        }
+    ]
+}
+```
+
+en Trust Policy indicaremos
+
+```sh
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "TrustPolicy",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "ec2.amazonaws.com"
+            },
+            "Action": [
+                "sts:AssumeRole",
+                "sts:TagSession"
+            ]
+        }
+    ]
+}
+```
+
+En la cuenta 222222222222 crearemos el rol arn:aws:iam::222222222222:role/TestRunners el cual contendrá las politicas que necesitemos para desplegar infraestructura allí, en nuestro ejemplo S3FullAccess y en Trust Policy indicaremos:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "TrustPolicy",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::111111111111:role/TestRunners"
+            },
+            "Action": [
+                "sts:AssumeRole",
+                "sts:TagSession"
+            ]
+        }
+    ]
+}
+```
