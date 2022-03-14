@@ -19,7 +19,7 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_329066851743 }}
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_111111111111 }}
         role-duration-seconds: 1200
         aws-region: eu-west-1
       
@@ -49,7 +49,7 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_329066851743 }}
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_111111111111 }}
         role-duration-seconds: 1200
         aws-region: eu-west-1
           
@@ -61,19 +61,19 @@ jobs:
         
     - name: Terraform Init    
       env:
-        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
+        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_222222222222 }}
       run: sh ./assume_role.sh $ROLE terraform init
 
     - name: Terraform Plan
       env:
-        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}      
+        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_222222222222 }}      
       if: github.event_name == 'pull_request' || github.event_name == 'push'
       continue-on-error: true       
       run: sh ./assume_role.sh $ROLE terraform plan
 
     - name: Terraform Plan Status
       env:
-        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}      
+        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_222222222222 }}      
       if: steps.plan.outcome == 'failure'
       run: sh ./assume_role.sh $ROLE exit 1
 
@@ -87,17 +87,17 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_329066851743 }}
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_111111111111 }}
         role-duration-seconds: 1200
         aws-region: eu-west-1
 
     - name: Terraform Init     
       env:
-        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
+        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_222222222222 }}
       run: sh ./assume_role.sh $ROLE terraform init
         
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       env:
-        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_550341143323 }}
+        ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME_222222222222 }}
       run: sh ./assume_role.sh $ROLE terraform apply -auto-approve
