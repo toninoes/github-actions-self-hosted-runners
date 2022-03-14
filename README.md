@@ -28,7 +28,7 @@ su -c "/actions-runner/config.sh --unattended --url https://github.com/toninoes/
 ## Crear y adjuntar Rol a la instancia del Runner
 Creamos el rol cuyo arn será arn:aws:iam::111111111111:role/TestRunners y contendrá la siguiente pólitica:
 
-```sh
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -49,7 +49,7 @@ Creamos el rol cuyo arn será arn:aws:iam::111111111111:role/TestRunners y conte
 
 en Trust Policy indicaremos
 
-```sh
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
