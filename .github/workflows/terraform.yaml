@@ -39,6 +39,12 @@ jobs:
           sudo yum install jq -y
         fi 
         
+    - name: Install docker
+      run: |
+        if [ ! `which docker` ]; then
+          sudo yum install docker -y
+        fi         
+        
   terraform_plan:
     runs-on: [self-hosted, Linux, X64]
     needs: [install]
