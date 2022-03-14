@@ -38,15 +38,9 @@ jobs:
         if [ ! `which jq` ]; then
           sudo yum install jq -y
         fi 
-        
-    - name: Install docker
-      run: |
-        if [ ! `which docker` ]; then
-          sudo yum install docker -y
-        fi         
 
-    - name: Start docker daemon
-      run: sudo service docker start
+    - name: Setup Docker
+      uses: docker-practice/actions-setup-docker@master
   
         
   terraform_plan:
