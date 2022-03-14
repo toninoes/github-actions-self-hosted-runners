@@ -38,11 +38,6 @@ jobs:
         if [ ! `which jq` ]; then
           sudo yum install jq -y
         fi 
-
-    - name: test
-      run: |
-        sudo service docker stop
-        sudo yum remove docker -y
         
     - name: Setup Docker
       uses: docker/setup-buildx-action@v1
