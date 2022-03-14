@@ -92,6 +92,9 @@ En la cuenta 222222222222 crearemos el rol **arn:aws:iam::222222222222:role/Test
 ## CI/CD en Terraform
 Lo que pretendemos conseguir es que en cada despliegue se realice:
 1. CI (Continous Integration)
-1.1. Comprobación del formato de código de Terraform
-1.2. Comprobación de validación de código de Terraform
-1.3. Plan Terraform: para ver qué cambios ocurrirán
+    1. Comprobación del formato de código de Terraform
+    2. Comprobación de validación de código de Terraform
+    3. Plan Terraform: para ver qué cambios ocurrirán
+
+2. CD (Continous Deployment)
+    1. Aplicación de Terraform: aplique el código y realice cambios en el entorno de la infraestructura
