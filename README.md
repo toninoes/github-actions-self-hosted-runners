@@ -91,10 +91,12 @@ En la cuenta 222222222222 crearemos el rol **arn:aws:iam::222222222222:role/Test
 
 ## CI/CD en Terraform
 Lo que pretendemos conseguir es que en cada despliegue se realice:
-1. CI (Continous Integration)
+1. CI (Continous Integration): Crearemos una rama el cual contendrá las nuevas caracteristicas (nuevo elemento infra, modificación de un elemento existente) y tras hacer un pull request se desencadenarán las siguientes acciones:
     1. Comprobación del formato de código de Terraform
     2. Comprobación de validación de código de Terraform
     3. Plan Terraform: para ver qué cambios ocurrirán
 
-2. CD (Continous Deployment)
-    1. Aplicación de Terraform: aplique el código y realice cambios en el entorno de la infraestructura
+2. CD (Continous Deployment): La rama main estará proteguida y sólo un grupo reducido de miembros del equipo tendrán la posibilidad de mergear con la rama main. Éstos, tras revisar el plan de la etapa anterior (CI), aprobarán el PR y mergearan por tanto con la rama main, la cual llevara a cabo:
+    1. Terraform Apply: aplique el código y realice cambios en el entorno de la infraestructura
+
+![CI/CD Terraform](.github/workflows/workflow_github.png)
