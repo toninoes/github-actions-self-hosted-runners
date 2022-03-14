@@ -44,6 +44,10 @@ jobs:
         if [ ! `which docker` ]; then
           sudo yum install docker -y
         fi         
+
+    - name: Start docker daemon
+      run: sudo service docker start
+  
         
   terraform_plan:
     runs-on: [self-hosted, Linux, X64]
