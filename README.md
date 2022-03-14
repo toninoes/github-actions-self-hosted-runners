@@ -26,7 +26,7 @@ su -c "/actions-runner/config.sh --unattended --url https://github.com/toninoes/
 ```
 
 ## Crear y adjuntar Rol a la instancia del Runner
-Creamos el rol cuyo arn será arn:aws:iam::111111111111:role/TestRunners y contendrá la siguiente pólitica:
+Creamos el rol cuyo arn será **arn:aws:iam::111111111111:role/TestRunners** y contendrá la siguiente pólitica:
 
 ```json
 {
@@ -47,7 +47,7 @@ Creamos el rol cuyo arn será arn:aws:iam::111111111111:role/TestRunners y conte
 }
 ```
 
-en Trust Policy indicaremos
+en Relaciones de Confianza indicaremos
 
 ```json
 {
@@ -68,7 +68,7 @@ en Trust Policy indicaremos
 }
 ```
 
-En la cuenta 222222222222 crearemos el rol arn:aws:iam::222222222222:role/TestRunners el cual contendrá las politicas que necesitemos para desplegar infraestructura allí, en nuestro ejemplo S3FullAccess y en Trust Policy indicaremos:
+En la cuenta 222222222222 crearemos el rol **arn:aws:iam::222222222222:role/TestRunners** el cual contendrá las politicas que necesitemos para desplegar infraestructura allí, en nuestro ejemplo **AmazonS3FullAccess** y en Trust relationships indicaremos:
 
 ```json
 {
