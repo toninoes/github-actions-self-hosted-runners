@@ -1,4 +1,4 @@
-# GitHub Actions con self-hosted runners
+# Automatización de Terraform con GitHub Actions con self-hosted runner en AWS
 En este proyecto vamos a demostrar cómo llevar a cabo un CI/CD de un proyecto de infraestructura con la ayuda de GitHub Actions y Terraform. Para ello nos vamos a servir de 	[GitHub Actions](https://github.com/features/actions).
 
 Vamos a partir del siguiente supuesto:
@@ -88,3 +88,10 @@ En la cuenta 222222222222 crearemos el rol **arn:aws:iam::222222222222:role/Test
     ]
 }
 ```
+
+## CI/CD en Terraform
+Lo que pretendemos conseguir es que en cada despliegue se realice:
+1. CI (Continous Integration)
+1.1. Comprobación del formato de código de Terraform
+1.2. Comprobación de validación de código de Terraform
+1.3. Plan Terraform: para ver qué cambios ocurrirán
