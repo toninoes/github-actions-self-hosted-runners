@@ -24,6 +24,8 @@ jobs:
         aws-region: eu-west-1
       
     - uses: actions/checkout@v3
+    - uses: docker/setup-buildx-action@v1
+    - uses: docker-practice/actions-setup-docker@master
     - uses: hashicorp/setup-terraform@v1.2.1
       with:
         terraform_version: 1.1.7
@@ -38,10 +40,6 @@ jobs:
         if [ ! `which jq` ]; then
           sudo yum install jq -y
         fi 
-        
-    - name: Setup Docker
-      uses: docker/setup-buildx-action@v1
-  
         
   terraform_plan:
     runs-on: [self-hosted, Linux, X64]
