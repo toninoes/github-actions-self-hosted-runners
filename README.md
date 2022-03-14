@@ -99,4 +99,4 @@ Lo que pretendemos conseguir es que en cada despliegue se realice:
 2. CD (Continous Deployment): La rama main estará proteguida y sólo un grupo reducido de miembros del equipo tendrán la posibilidad de mergear con la rama main. Éstos, tras revisar el plan de la etapa anterior (CI), aprobarán el PR y mergearan por tanto con la rama main, la cual llevara a cabo:
     1. Terraform Apply: aplique el código y realice cambios en el entorno de la infraestructura
 
-![CI/CD Terraform](.github/workflows/workflow_github.png)
+![CI/CD Terraform](.github/workflows/workflow_github.png){:width="50%"}
