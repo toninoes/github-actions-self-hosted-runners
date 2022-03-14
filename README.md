@@ -25,6 +25,10 @@ su -c "/actions-runner/config.sh --unattended --url https://github.com/toninoes/
 /usr/bin/bash svc.sh start
 ```
 
+Tras configurarse lo anterior podremos ver nuestro runner:
+
+<img src=".github/workflows/tonitestrunner.png" width="80%">
+
 ## Crear y adjuntar Rol a la instancia del Runner
 Creamos el rol cuyo arn será **arn:aws:iam::111111111111:role/TestRunners** y contendrá la siguiente pólitica:
 
@@ -99,4 +103,4 @@ Lo que pretendemos conseguir es que en cada despliegue se realice:
 2. CD (Continous Deployment): La rama main estará proteguida y sólo un grupo reducido de miembros del equipo tendrán la posibilidad de mergear con la rama main. Éstos, tras revisar el plan de la etapa anterior (CI), aprobarán el PR y mergearan por tanto con la rama main, la cual llevara a cabo:
     1. Terraform Apply: aplique el código y realice cambios en el entorno de la infraestructura
 
-<center><img src=".github/workflows/workflow_github.png" width="80%"></center>
+<img src=".github/workflows/workflow_github.png" width="80%">
