@@ -1,4 +1,4 @@
-# Automatización de Terraform con GitHub Actions con self-hosted runner en AWS
+# Automatización de Terraform con GitHub Actions y self-hosted runners en AWS
 En este proyecto vamos a demostrar cómo llevar a cabo un CI/CD de un proyecto de infraestructura con la ayuda de GitHub Actions y Terraform. Para ello nos vamos a servir de 	[GitHub Actions](https://github.com/features/actions).
 
 Vamos a partir del siguiente supuesto:
